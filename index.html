@@ -258,6 +258,13 @@ table.card td.tx{font:800 13px/1.25 var(--fb)}
 .tk-name{font-size:20px;font-weight:700;line-height:1.15;margin-top:5px;text-transform:uppercase}
 .tk-x{font-size:14px;font-weight:700;margin-top:2px;text-transform:uppercase;color:#333}
 .tk-x::before{content:"+ "}
+.tk-add{display:inline-block;margin-top:6px;background:#FFE27A;color:#3D2A00;border:2px dashed #B98500;border-radius:4px;padding:3px 8px;font-size:13.5px;font-weight:700;letter-spacing:.03em}
+.tk-std{margin-top:5px;font-size:11.5px;font-weight:700;color:#2E7D57;letter-spacing:.06em}
+.glow{position:relative;z-index:1;animation:glow 1.1s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:0 4px 0 var(--gold-d),0 0 0 3px var(--gold)}50%{box-shadow:0 4px 0 var(--gold-d),0 0 0 8px rgba(255,201,60,.5)}}
+.goal{font:700 14px/1 var(--fd);background:var(--gold-l);color:var(--gold-t);padding:7px 9px;border-radius:9px;white-space:nowrap;flex:none}
+.note.mini{padding:8px 11px;font-size:13px;line-height:1.35}
+.btl>svg:first-child{width:38px;height:50px}
 .tk-remake{position:absolute;right:12px;top:28px;transform:rotate(-10deg);border:3px solid #C82014;color:#C82014;font-weight:700;font-size:13px;padding:2px 7px;border-radius:4px;letter-spacing:.12em;background:#FFFEF9}
 .patience{display:flex;align-items:center;gap:8px;margin-top:8px;font:800 11px/1 var(--fb);color:#555;letter-spacing:.06em;text-transform:uppercase}
 .pt{flex:1;height:7px;border-radius:999px;background:#E9E4DA;overflow:hidden}
@@ -579,33 +586,33 @@ const ORDER=['shot','pump','half','roast','chip','matcha','fruit'];
 const FL=['Vanilla','Caramel','Hazelnut','Toffee Nut','Sugar-Free Vanilla','Peppermint'];
 const G=['Espresso bar','Tea & Chocolate','Cold bar','Frappuccino'];
 const D=[
-  {id:'latte',g:0,n:'Caffè Latte',on:'{f} Latte',fl:FL,t:['hot','iced'],c:[['shot','E1'],['pump','P1']],lb:{pump:'{f} pumps'},col:'#D7B68F',
-   r:['2% milk, steamed, with a thin layer of foam. Signature espresso.','Shots 1-1-2-2 (S-T-G-V). Only Iced Venti gets 3.','No syrup unless the ticket adds one: 2-3-4-5 pumps, Iced Venti 6.']},
-  {id:'capp',g:0,n:'Cappuccino',fl:FL,x:'Add {f} Syrup',t:['hot','iced'],c:[['shot','E1'],['pump','P1']],lb:{pump:'{f} pumps'},col:'#DCC09D',
-   r:['Same ingredients as a latte: 2% steamed, foam, Signature.','The difference: lots more foam, so the cup feels light.','Shots 1-1-2-2 like a latte.']},
+  {id:'latte',g:0,n:'Caffè Latte',adds:FL,addon:.6,t:['hot','iced'],c:[['shot','E1'],['pump','P1']],lb:{pump:'{f} pumps'},col:'#D7B68F',
+   r:['2% milk, steamed, with a thin layer of foam. Signature espresso.','Shots 1-1-2-2 (S-T-G-V). Only Iced Venti gets 3.','No syrup in the standard recipe. If the ticket says CUSTOMER ADDS a syrup: 2-3-4-5 pumps, Iced Venti 6.']},
+  {id:'capp',g:0,n:'Cappuccino',adds:FL,addon:.6,t:['hot','iced'],c:[['shot','E1'],['pump','P1']],lb:{pump:'{f} pumps'},col:'#DCC09D',
+   r:['Same ingredients as a latte: 2% steamed, foam, Signature.','The difference: lots more foam, so the cup feels light.','Shots 1-1-2-2 like a latte. No syrup unless the customer adds one.']},
   {id:'mocha',g:0,n:'Caffè Mocha',t:['hot','iced'],c:[['shot','E1'],['pump','P1']],lb:{pump:'Mocha pumps'},col:'#8B5A3C',
    r:['Mocha sauce + 2% steamed milk + foam + whipped cream.','Shots like a latte: 1-1-2-2.','Mocha pumps like latte syrup: 2-3-4-5. Iced Venti 6.']},
   {id:'wmocha',g:0,n:'White Chocolate Mocha',t:['hot','iced'],c:[['shot','E1'],['pump','P1']],lb:{pump:'White Mocha pumps'},col:'#E3CCAA',
    r:['Same as a mocha, with White Chocolate Mocha sauce.','2% steamed milk, foam, whipped cream.','Shots 1-1-2-2, pumps 2-3-4-5.']},
   {id:'cmac',g:0,n:'Caramel Macchiato',t:['hot','iced'],c:[['shot','E1'],['pump','P2']],lb:{pump:'Vanilla pumps'},col:'#D2A879',
    r:['Vanilla is one less than a latte: 1-2-3-4. Iced Venti 5.','Shots like a latte: 1-1-2-2, Iced Venti 3.']},
-  {id:'flat',g:0,n:'Flat White',fl:FL,x:'Add {f} Syrup',t:['hot','iced'],c:[['shot','E4'],['pump','P1']],lb:{pump:'{f} pumps',shot:'Ristretto shots'},col:'#C9A27A',
-   r:['Whole milk, steamed. Signature espresso, ristretto. No foam layer.','Ristretto shots hot 2-2-3-3. Iced 2-3-4.']},
-  {id:'amer',g:0,n:'Caffè Americano',fl:FL,x:'Add {f} Syrup',t:['hot','iced'],c:[['shot','E2'],['pump','P1']],lb:{pump:'{f} pumps'},col:'#2B160B',
-   r:['Just Signature espresso and hot water. No milk.','Shots 1-2-3-4 (S-T-G-V), hot or iced.']},
+  {id:'flat',g:0,n:'Flat White',adds:FL,addon:.6,t:['hot','iced'],c:[['shot','E4'],['pump','P1']],lb:{pump:'{f} pumps',shot:'Ristretto shots'},col:'#C9A27A',
+   r:['Whole milk, steamed. Signature espresso, ristretto. No foam layer, no syrup.','Ristretto shots hot 2-2-3-3. Iced 2-3-4.','If the customer adds syrup: 2-3-4-5, Iced Venti 6.']},
+  {id:'amer',g:0,n:'Caffè Americano',adds:FL,addon:.6,t:['hot','iced'],c:[['shot','E2'],['pump','P1']],lb:{pump:'{f} pumps'},col:'#2B160B',
+   r:['Just Signature espresso and hot water. No milk, no syrup.','Shots 1-2-3-4 (S-T-G-V), hot or iced.','If the customer adds syrup: 2-3-4-5, Iced Venti 6.']},
   {id:'cort',g:0,n:'Cortado',t:['hot'],c:[['shot','E5']],lb:{shot:'Ristretto shots'},col:'#B98A5E',
    r:['Short only. 3 ristretto shots.','The one drink with BLONDE espresso.','Whole milk, steamed, with foam.']},
   {id:'shaken',g:0,n:'Iced Shaken Espresso',t:['iced'],c:[['shot','E3'],['pump','P3']],lb:{pump:'Classic pumps'},col:'#A8743F',
-   r:['Signature espresso + Classic syrup, shaken. Topped with 2% milk.','Pumps 1-2-3 (T-G-V). Shots 2-3-4: always one more shot than pumps.']},
-  {id:'misto',g:1,n:'Caffè Misto',fl:FL,x:'Add {f} Syrup',t:['hot'],c:[['pump','P1']],lb:{pump:'{f} pumps'},col:'#B88A5E',r:['Syrup like a latte: 2-3-4-5.','No espresso.']},
+   r:['Signature espresso + Classic syrup, shaken. Topped with 2% milk.','Pumps 1-2-3 (T-G-V). Shots 2-3-4: always one more shot than pumps.','Old recipes online say 4 pumps in a Grande. Your card and the app say 2: that is the current standard.']},
+  {id:'misto',g:1,n:'Caffè Misto',adds:FL,addon:1,t:['hot'],c:[['pump','P1']],lb:{pump:'{f} pumps'},col:'#B88A5E',r:['Brewed coffee + steamed milk, half and half. No espresso, no syrup.','If the customer adds syrup: 2-3-4-5, like a latte.']},
   {id:'chai',g:1,n:'Chai Tea Latte',t:['hot','iced'],c:[['pump','P1']],lb:{pump:'Chai pumps'},col:'#C99A6B',r:['Tea lattes follow the latte: 2-3-4-5. Iced Venti 6.']},
-  {id:'hotchoc',g:1,n:'Hot Chocolate',ni:'Chocolate Milk',t:['hot','iced'],c:[['pump','P1']],lb:{pump:'Mocha pumps'},col:'#7A4A2E',r:['Like a latte: 2-3-4-5. Cold Venti 6.','The card calls the cold one Chocolate Milk.']},
-  {id:'icedcoffee',g:2,n:'Iced Coffee',t:['iced'],c:[['pump','C1']],lb:{pump:'Classic pumps'},col:'#4F301C',r:['Pumps 3-4-6-7 (T-G-V-TR).','Grande to Venti skips 5.']},
-  {id:'icedtea',g:2,n:'Iced Tea',on:'Iced {f} Tea',fl:['Black','Green','Passion Tango'],x:'Sweetened',t:['iced'],c:[['pump','C2']],col:'#9A5523',r:['Pumps 1-2-3-4 (T-G-V-TR). Just count up.']},
-  {id:'refresher',g:2,n:'Starbucks Refreshers',on:'{f} Refresher',fl:['Strawberry Açaí','Mango Dragonfruit','Pineapple Passionfruit'],t:['iced'],c:[['pump','C2'],['fruit','C5']],col:'#E0567F',r:['Pumps 1-2-3-4 (T-G-V-TR), like iced tea.','Fruit: 1 scoop for T, G and V. Trenta gets 2.']},
+  {id:'hotchoc',g:1,n:'Hot Chocolate',ni:'Chocolate Milk',t:['hot','iced'],c:[['pump','P1']],lb:{pump:'Mocha pumps'},col:'#7A4A2E',r:['Mocha sauce + steamed 2% milk, topped with whipped cream.','Mocha pumps like a latte: 2-3-4-5. Cold Venti 6.','The card calls the cold one Chocolate Milk.']},
+  {id:'icedcoffee',g:2,n:'Iced Coffee',t:['iced'],c:[['pump','C1']],lb:{pump:'Classic pumps'},col:'#4F301C',r:['Comes sweetened with Classic by default.','Pumps 3-4-6-7 (T-G-V-TR). Grande to Venti skips 5.']},
+  {id:'icedtea',g:2,n:'Iced Tea',on:'Iced {f} Tea',fl:['Black','Green','Passion Tango'],adds:['Sweetener'],x:'{f}',addon:1,lb:{pump:'{f} pumps'},t:['iced'],c:[['pump','C2']],col:'#9A5523',r:['Iced tea comes unsweetened.','Only if the customer wants it sweet: 1-2-3-4 pumps (T-G-V-TR).']},
+  {id:'refresher',g:2,n:'Starbucks Refreshers',on:'{f} Refresher',fl:['Strawberry Açaí','Mango Dragonfruit','Pineapple Passionfruit'],adds:['Sweetener'],x:'{f}',addon:.5,lb:{pump:'{f} pumps'},t:['iced'],c:[['pump','C2'],['fruit','C5']],col:'#E0567F',r:['No syrup in the standard recipe: the base is already sweet.','Fruit: 1 scoop for T, G and V. Trenta gets 2.','Only if the customer wants it sweeter: 1-2-3-4 pumps (T-G-V-TR).']},
   {id:'energy',g:2,n:'Energy Refresher',t:['iced'],c:[['pump','C3']],col:'#F0A13C',r:['Pumps 4-5-6-7 (T-G-V-TR). Starts at 4.']},
-  {id:'coldbrew',g:2,n:'Cold Brew',fl:FL,x:'Add {f} Syrup',t:['iced'],c:[['pump','C4']],lb:{pump:'{f} pumps'},col:'#2F1A0F',r:['Pumps 1-2-3-4 (T-G-V-TR).']},
-  {id:'nitro',g:2,n:'Nitro Cold Brew',fl:FL,x:'Add {f} Syrup',t:['iced'],c:[['pump','C4N']],lb:{pump:'{f} pumps'},col:'#2A170D',r:['Only Tall and Grande.','Pumps 1-2, like cold brew.']},
+  {id:'coldbrew',g:2,n:'Cold Brew',adds:FL,addon:1,t:['iced'],c:[['pump','C4']],lb:{pump:'{f} pumps'},col:'#2F1A0F',r:['Comes unsweetened.','If the customer adds syrup: 1-2-3-4 (T-G-V-TR).']},
+  {id:'nitro',g:2,n:'Nitro Cold Brew',adds:FL,addon:1,t:['iced'],c:[['pump','C4N']],lb:{pump:'{f} pumps'},col:'#2A170D',r:['Only Tall and Grande. Comes unsweetened.','If the customer adds syrup: 1-2, like cold brew.']},
   {id:'matcha',g:2,n:'Iced Matcha Latte',t:['iced'],c:[['matcha','C6']],col:'#93BB5E',r:['Matcha scoops 2-3-4 (T-G-V).']},
   {id:'mochafrap',g:3,n:'Mocha Frappuccino',blend:1,t:['iced'],c:[['half','C7'],['roast','C7']],lb:{half:'Mocha Sauce pumps',roast:'Frappuccino Roast pumps'},col:'#8A5A3C',
    r:['Whole milk + Mocha Sauce + Frappuccino Roast, topped with whipped cream.','Sauce and Roast are both 2-3-4 (T-G-V), half-dose pump.']},
@@ -691,6 +698,8 @@ const typesOf=c=>ORDER.filter(t=>c[t]!=null);
 const ozOf=(size,temp)=>size==='V'&&temp==='iced'?24:SZ[size].oz;
 const recipeOf=(d,temp)=>{const r=REC[d.id];return r&&r.rt===temp?r:null;};
 const qText=(d,t,f)=>'How many '+label(d,t,f).toLowerCase()+'?';
+const addText=(d,a)=>a?fill(d.x||'{f} Syrup',a):'';
+const addWhat=d=>d.x==='{f}'?'sweetener':'syrup';
 function shade(hex,p){
   const n=parseInt(hex.slice(1),16);let r=n>>16,g=(n>>8)&255,b=n&255;
   r=Math.round(r*(1+p));g=Math.round(g*(1+p));b=Math.round(b*(1+p));
@@ -1111,7 +1120,10 @@ function levelSheet(id){
   showSheet(
     '<div style="display:flex;align-items:center;gap:16px"><span class="node" style="position:relative;margin:0;width:72px;height:72px;flex:none;--c:'+L.c+';--cd:'+shade(L.c,-.28)+';color:'+shade(L.c,-.28)+'">'+nodeIcon(L.ico)+'</span><div><span class="lab">Level '+(LEVELS.indexOf(L)+1)+'</span><h2 class="h-disp" style="font-size:26px">'+esc(L.n)+'</h2><div class="mstars" style="justify-content:flex-start">'+[1,2,3].map(k=>starSVG(24,st>=k)).join('')+'</div></div></div>'+
     '<ul class="lvl-list">'+list+'</ul>'+
-    '<div class="acts"><button class="b3d wide" data-act="play-level" data-id="'+id+'" data-focus>Start shift '+I.chev+'</button>'+(L.drinks?'<button class="b3d cream wide" data-act="study-level" data-id="'+id+'">Study the recipes first</button>':'')+'</div>','Level');
+    (L.drinks?'<p class="note mini">New here? Start with <b>help</b>: the right buttons glow so you learn each recipe. Then play the real shift for stars.</p>':'')+
+    '<div class="acts">'+(L.drinks?'<button class="b3d gold wide" data-act="play-guided" data-id="'+id+'"'+(st?'':' data-focus')+'>'+I.bulb+' Learn with help</button>':'')+
+    '<button class="b3d wide" data-act="play-level" data-id="'+id+'"'+(st||!L.drinks?' data-focus':'')+'>Start shift '+I.chev+'</button>'+
+    (L.drinks?'<button class="b3d cream wide" data-act="study-level" data-id="'+id+'">See the recipes</button>':'')+'</div>','Level');
 }
 function editName(el){
   const inp=document.createElement('input');
@@ -1149,7 +1161,8 @@ function fieldsFor(d,temp,size){
   }else{
     typesOf(c).forEach(t=>{
       const cat=t==='shot'?'Espresso & Shot Options':t==='pump'?'Sweeteners':t==='half'?'Frappuccino':'Add-ins';
-      F.push({cat:cat,val:label(d,t,''),num:c[t]});
+      if(t==='pump'&&d.adds)F.push({cat:'Only if the customer adds it',val:'Pump(s) of '+addWhat(d),num:c[t],opt:1});
+      else F.push({cat:cat,val:label(d,t,''),num:c[t]});
     });
   }
   return F;
@@ -1173,6 +1186,7 @@ function renderRecipes(){
         '<span class="kind">'+G[d.g]+'</span></button>';
     }).join('')+'</div>';
 }
+function practiceBtns(d){return '<button class="b3d gold wide" data-act="practice" data-g="1" data-id="'+d.id+'">'+I.bulb+' Practice with help</button><button class="b3d wide" data-act="practice" data-id="'+d.id+'">Test me '+I.chev+'</button>';}
 function renderDetail(){
   const d=DM[RV.open];
   if(d.t.indexOf(RV.temp)<0)RV.temp=d.t[0];
@@ -1187,7 +1201,7 @@ function renderDetail(){
   }).join('');
   const cmpTypes=[];d.c.forEach(([k])=>{if(cmpTypes.indexOf(k)<0)cmpTypes.push(k);});
   const table='<span class="lab">Every size · '+tempTag(d,t)+'</span><div class="cmp-sizes"><table><thead><tr><th></th>'+sizes.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'+
-    cmpTypes.map(k=>'<tr><td>'+esc(k==='pump'&&r&&!r.syr?'Syrup pumps · only if added (bar card)':label(d,k,''))+'</td>'+sizes.map(x=>{const v=countsFor(d,t,x)[k];return '<td class="'+(v==null?'na':'')+'">'+(RV.quiz?'?':(v==null?'–':v))+'</td>';}).join('')+'</tr>').join('')+'</tbody></table></div>';
+    cmpTypes.map(k=>'<tr><td>'+esc(k==='pump'&&((r&&!r.syr)||d.adds)?'If the customer adds '+addWhat(d):label(d,k,''))+'</td>'+sizes.map(x=>{const v=countsFor(d,t,x)[k];return '<td class="'+(v==null?'na':'')+'">'+(RV.quiz?'?':(v==null?'–':v))+'</td>';}).join('')+'</tr>').join('')+'</tbody></table></div>';
   let note='';
   if(d.sizes)note='<p class="note">Only the Grande recipe so far. Ask for the Tall and Venti chip scoops and they will be added.</p>';
   if(!r)note=REC[d.id]?'<p class="note">The '+(t==='iced'?'iced':'hot')+' version: shots and pumps from the bar card. The full recipe is on the '+(REC[d.id].rt==='hot'?'Hot':'Iced')+' tab.</p>':'<p class="note">Full recipe coming soon. For now: the shots, pumps and scoops from the bar card.</p>';
@@ -1195,7 +1209,7 @@ function renderDetail(){
     '<div><button class="b3d dark sm" data-act="back-coll">'+I.back+' All recipes</button></div>'+
     '<div class="dhero"><span class="disc">'+art(d,t,finishedState(d,t,s))+'</span><h1>'+esc(dname(d,t,''))+'</h1><p>'+G[d.g]+(r?' · Full recipe':' · From the bar card')+'</p>'+
       '<div class="seg3" role="group" aria-label="Hot or iced"><button data-act="rtemp" data-t="hot" aria-pressed="'+(t==='hot')+'"'+(hotOk?'':' disabled')+'>Hot</button><button data-act="rtemp" data-t="iced" aria-pressed="'+(t==='iced')+'"'+(icedOk?'':' disabled')+'>'+(d.blend?'Blended':d.ni?'Cold':'Iced')+'</button></div></div>'+
-    '<button class="b3d wide only-tab" data-act="practice" data-id="'+d.id+'">Practice this drink '+I.chev+'</button></div><div class="dright">'+
+    '<div class="acts only-tab">'+practiceBtns(d)+'</div></div><div class="dright">'+
     '<div class="panel" style="display:flex;flex-direction:column;gap:12px">'+
       '<span class="lab">Size options</span><div class="wi-bar"></div>'+
       '<div class="sizes" role="group" aria-label="Size">'+sizes.map(x=>'<button class="sizeb" data-act="rsize" data-s="'+x+'" aria-pressed="'+(x===s)+'"><span class="ring">'+sizeCupSVG(x===s)+'</span><b>'+SZ[x].n+'</b><span>'+ozOf(x,t)+' fl oz</span></button>').join('')+'</div>'+
@@ -1204,7 +1218,7 @@ function renderDetail(){
     '</div>'+
     '<div class="panel" style="display:flex;flex-direction:column;gap:8px">'+table+'</div>'+
     '<div class="panel" style="display:flex;flex-direction:column;gap:10px"><span class="lab">Remember it</span><ul class="tips">'+d.r.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>'+
-    '<button class="b3d wide only-phone" data-act="practice" data-id="'+d.id+'">Practice this drink '+I.chev+'</button></div></div>';
+    '<div class="acts only-phone">'+practiceBtns(d)+'</div></div></div>';
 }
 
 /* =====================================================================
@@ -1319,18 +1333,19 @@ function startShift(opt){
 }
 function orderFromFact(f){
   const d=DM[f.d],temp=f.temp,size=f.size||rnd(sizesFor(d,temp));
-  const fl=d.fl&&!recipeOf(d,temp)?rnd(d.fl):'';
-  return {d:f.d,temp:temp,size:size,fl:fl,who:rnd(NAMES),ch:rnd(CH),no:Math.floor(10+Math.random()*89),retry:false,cust:newCustomer(),greet:rnd(GREET)};
+  const rec=recipeOf(d,temp),fl=d.fl&&!rec?rnd(d.fl):'';
+  const add=d.adds&&!rec&&(f.type==='pump'||Math.random()<(d.addon||0))?rnd(d.adds):'';
+  return {d:f.d,temp:temp,size:size,fl:fl,add:add,who:rnd(NAMES),ch:rnd(CH),no:Math.floor(10+Math.random()*89),retry:false,cust:newCustomer(),greet:rnd(GREET)};
 }
 function specOf(o){
   const d=DM[o.d],c=countsFor(d,o.temp,o.size),r=recipeOf(d,o.temp);
   if(r&&r.kind==='frap')return {rec:true,kind:'frap',base:r.base,syrK:r.syr,syrN:c.half||0,roastN:c.roast||0,chips:c.chip||0,whip:!!r.whip,drizzle:r.drizzle,topping:r.topping};
   if(r)return {rec:true,kind:'esp',roast:r.roast,pull:r.pull,shots:c.shot,base:r.base,prep:r.prep||null,foam:!!r.foam,whip:!!r.whip,drizzle:'None',topping:'None',syrK:r.syr,syrN:r.syr?(c.pump||0):0};
-  const s={rec:false};typesOf(c).forEach(t=>{s[t]=c[t];});return s;
+  const s={rec:false};typesOf(c).forEach(t=>{s[t]=(t==='pump'&&d.adds&&!o.add)?0:c[t];});return s;
 }
 function blankOf(sp){
-  if(sp.rec&&sp.kind==='frap')return {rec:true,kind:'frap',base:null,syrK:null,syrN:0,roastN:0,chips:0,whip:false,drizzle:'None',topping:'None'};
-  if(sp.rec)return {rec:true,kind:'esp',roast:null,pull:null,shots:0,base:null,prep:null,foam:false,whip:false,drizzle:'None',topping:'None',syrK:null,syrN:0};
+  if(sp.rec&&sp.kind==='frap')return {rec:true,kind:'frap',base:null,noSyr:false,syrK:null,syrN:0,roastN:0,chips:0,whip:false,drizzle:'None',topping:'None'};
+  if(sp.rec)return {rec:true,kind:'esp',roast:null,pull:null,shots:0,base:null,prep:null,foam:false,whip:false,drizzle:'None',topping:'None',noSyr:false,syrK:null,syrN:0};
   const b={rec:false};typesOf(sp).forEach(t=>{b[t]=0;});return b;
 }
 function tabsOf(o){
@@ -1358,13 +1373,13 @@ function nextOrder(){
   const g=$('#game');if(g)g.scrollTop=0;
 }
 function ticketHTML(o,first){
-  const d=DM[o.d],tag=tempTag(d,o.temp),x=(d.x&&o.fl)?fill(d.x,o.fl):'';
+  const d=DM[o.d],tag=tempTag(d,o.temp),x=addText(d,o.add);
   const el=SH.done?SH.secs:(Date.now()-SH.t0)/1000;
   return '<div class="ticket'+(first?' printing':'')+'" role="group" aria-label="Order ticket">'+
     '<div class="tk-top"><span>'+o.ch+' · '+o.time+'</span><span>#'+o.no+' '+esc(o.who.toUpperCase())+'</span></div>'+
     '<div class="tk-mid"><span class="tk-sz">'+SZ[o.size].n.toUpperCase()+'</span><span class="tk-tp '+(tag==='Hot'?'hot':tag==='Blended'?'blend':'iced')+'">'+tag.toUpperCase()+'</span><span style="font-size:12.5px;color:#555;font-weight:700">'+ozOf(o.size,o.temp)+' OZ</span></div>'+
     '<div class="tk-name">'+esc(dname(d,o.temp,o.fl).replace(/^Iced /,''))+'</div>'+
-    (x?'<div class="tk-x">'+esc(x)+'</div>':'')+
+    (x?'<div class="tk-add">CUSTOMER ADDS: '+esc(x.toUpperCase())+'</div>':'<div class="tk-std">✓ STANDARD RECIPE · NO CHANGES</div>')+
     (o.retry?'<div class="tk-remake">REMAKE</div>':'')+
     '<div class="patience'+(SH.done?' stop':'')+'">'+I.clock+'<span class="pt"><i style="animation-duration:'+SH.limit+'s;--real:'+SH.limit+'s;--dl:-'+Math.min(el,SH.limit).toFixed(2)+'s"></i></span><span>speed ★</span></div>'+
   '</div>';
@@ -1391,13 +1406,29 @@ function touched(k){
   if(!b.rec)return b[k]>0;
   if(k==='esp')return !!(b.roast||b.pull||b.shots);
   if(k==='milk')return !!(b.base||b.foam);
-  if(k==='syr')return b.syrN>0;
+  if(k==='syr')return b.syrN>0||!!b.noSyr;
   if(k==='blend')return !!(b.roastN||b.chips);
   return b.whip||b.drizzle!=='None'||b.topping!=='None';
 }
-function optBtn(act,k,v,on,body,extra){return '<button class="opt'+(extra||'')+'" data-act="'+act+'" data-k="'+k+'" data-v="'+esc(v)+'" aria-pressed="'+!!on+'"'+(SH.done?' disabled':'')+'>'+body+'</button>';}
+/* "Learn with help": the right choices glow and counters show their goal */
+const guided=()=>!!(SH.on&&SH.opt&&SH.opt.guided&&!SH.done);
+function glowFor(act,k,v){
+  if(!guided())return false;
+  const sp=SH.cur.spec,b=SH.b;
+  if(act==='set')return sp[k]===v&&b[k]!==v;
+  if(act==='tog')return !!sp[k]&&!b[k];
+  return false;
+}
+function optBtn(act,k,v,on,body,extra){return '<button class="opt'+(extra||'')+(glowFor(act,k,v)?' glow':'')+'" data-act="'+act+'" data-k="'+k+'" data-v="'+esc(v)+'" aria-pressed="'+!!on+'"'+(SH.done?' disabled':'')+'>'+body+'</button>';}
+function goalOf(k){
+  const sp=SH.cur.spec;
+  return {shots:sp.shots,syrN:sp.syrN,roastN:sp.roastN,chips:sp.chips}[k]!=null?{shots:sp.shots,syrN:sp.syrN,roastN:sp.roastN,chips:sp.chips}[k]:sp[k];
+}
 function counterRow(k,n,btnLabel,icon){
-  return '<div class="ctr"><button class="mn" data-act="dec" data-k="'+k+'" aria-label="Remove one"'+(SH.done?' disabled':'')+'>−</button><b class="n" aria-live="polite">'+n+'</b><button class="b3d" data-act="inc" data-k="'+k+'"'+(SH.done?' disabled':'')+'>'+(icon||'')+btnLabel+'</button></div>';
+  const g=guided()?goalOf(k):null;
+  return '<div class="ctr"><button class="mn'+(g!=null&&n>g?' glow':'')+'" data-act="dec" data-k="'+k+'" aria-label="Remove one"'+(SH.done?' disabled':'')+'>−</button><b class="n" aria-live="polite">'+n+'</b>'+
+    (g!=null?'<span class="goal">Goal '+g+'</span>':'')+
+    '<button class="b3d'+(g!=null&&n<g?' glow':'')+'" data-act="inc" data-k="'+k+'"'+(SH.done?' disabled':'')+'>'+(icon||'')+btnLabel+'</button></div>';
 }
 const MINI_SHOT='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M6 4h12l-1.5 15a2 2 0 0 1-2 1.8h-5a2 2 0 0 1-2-1.8z" fill="#fff" fill-opacity=".9"/><path d="M7.2 10h9.6l-.9 8.5h-7.8z" fill="#4A2C1D"/></svg>';
 function panelHTML(){
@@ -1419,22 +1450,27 @@ function panelHTML(){
       const milk=b.base==='2% Milk'||b.base==='Whole Milk';
       body='<div class="orow"><span class="lab">Milk or water</span><div class="opts b4" style="--n:4">'+BASES.map(x=>optBtn('set','base',x,b.base===x,BASE_ICON[x]+x)).join('')+'</div></div>'+
         '<div class="orow"><span class="lab">Milk temp &amp; foam</span><div class="opts" style="--n:3">'+
-          '<button class="opt row" data-act="set" data-k="prep" data-v="Steamed" aria-pressed="'+(b.prep==='Steamed')+'"'+(SH.done||!milk?' disabled':'')+'>'+I.steam+'Steamed</button>'+
-          '<button class="opt row" data-act="set" data-k="prep" data-v="Cold" aria-pressed="'+(b.prep==='Cold')+'"'+(SH.done||!milk?' disabled':'')+'>'+I.cold+'Cold</button>'+
+          '<button class="opt row'+(milk&&glowFor('set','prep','Steamed')?' glow':'')+'" data-act="set" data-k="prep" data-v="Steamed" aria-pressed="'+(b.prep==='Steamed')+'"'+(SH.done||!milk?' disabled':'')+'>'+I.steam+'Steamed</button>'+
+          '<button class="opt row'+(milk&&glowFor('set','prep','Cold')?' glow':'')+'" data-act="set" data-k="prep" data-v="Cold" aria-pressed="'+(b.prep==='Cold')+'"'+(SH.done||!milk?' disabled':'')+'>'+I.cold+'Cold</button>'+
           optBtn('tog','foam','1',b.foam,I.foam+'Foam',' row')+'</div></div>';
     }else if(T.k==='syr'){
-      body='<div class="orow"><span class="lab">Pick a bottle</span><div class="rack">'+RACK.map(x=>'<button class="btl" data-act="bottle" data-v="'+esc(x)+'" aria-pressed="'+(b.syrK===x)+'"'+(SH.done?' disabled':'')+'>'+bottleSVG(SYR[x],SAUCE[x]?'SAUCE':'')+esc(x)+'</button>').join('')+'</div></div>'+
-        '<div class="orow"><span class="lab">'+(b.syrK?esc(b.syrK)+' pumps':'Pumps (leave at 0 for no syrup)')+(b.kind==='frap'?' · half-dose':'')+'</span>'+counterRow('syrN',b.syrN,'Pump','')+'</div>';
+      const sp=SH.cur.spec,gl=x=>guided()&&(x===''?(!sp.syrK&&!b.noSyr):(x===sp.syrK&&b.syrK!==x))?' glow':'';
+      body='<p class="note mini">'+(b.kind==='frap'?'Pick the sauce in this Frappuccino, then pump it.':'Syrup goes in only if the recipe has one, or the ticket says <b>CUSTOMER ADDS</b>. Otherwise tap <b>No syrup</b>.')+'</p>'+
+        '<div class="orow"><div class="rack">'+
+        (b.kind==='frap'?'':'<button class="btl'+gl('')+'" data-act="bottle" data-v="" aria-pressed="'+!!b.noSyr+'"'+(SH.done?' disabled':'')+'>'+I.none+'No syrup</button>')+
+        RACK.map(x=>'<button class="btl'+gl(x)+'" data-act="bottle" data-v="'+esc(x)+'" aria-pressed="'+(b.syrK===x)+'"'+(SH.done?' disabled':'')+'>'+bottleSVG(SYR[x],SAUCE[x]?'SAUCE':'')+esc(x)+'</button>').join('')+'</div></div>'+
+        (b.syrK?'<div class="orow"><span class="lab">'+esc(b.syrK)+' pumps'+(b.kind==='frap'?' · half-dose':'')+'</span>'+counterRow('syrN',b.syrN,'Pump','')+'</div>':'');
     }else{
       body='<div class="opts" style="--n:1">'+optBtn('tog','whip','1',b.whip,I.whip+'Whipped cream',' row')+'</div>'+
         '<div class="orow"><span class="lab">Drizzle</span><div class="opts" style="--n:3">'+DRIZ.map(x=>optBtn('set','drizzle',x,b.drizzle===x,x)).join('')+'</div></div>'+
         '<div class="orow"><span class="lab">Crunchy topping</span><div class="opts" style="--n:3">'+TOPS.map(x=>optBtn('set','topping',x,b.topping===x,x)).join('')+'</div></div>';
     }
   }else{
-    const t=T.k,lb=label(d,t,o.fl);
+    const t=T.k,lb=label(d,t,o.add);
     const big=t==='shot'?I.machine:t==='pump'?bottleSVG(d.col,''):t==='half'?I.blender:t==='matcha'?SCOOP_M:SCOOP_F;
     const btn=t==='shot'?'Pull shot':t==='pump'||t==='half'?'Pump':'Scoop';
-    body='<div class="single">'+big+'<div><b>'+esc(lb)+'</b><span>'+(t==='half'?'Frappuccino half-dose pump':t==='pump'?'Full-dose pump':t==='shot'?'Tap once for every shot':'One tap = one scoop')+'</span></div></div>'+counterRow(t,b[t],btn,t==='shot'?MINI_SHOT:'');
+    const sub=t==='half'?'Frappuccino half-dose pump':t==='pump'?(d.adds?(o.add?'The ticket says CUSTOMER ADDS it. Use the bar card.':'Not in the standard recipe. Only if the ticket says CUSTOMER ADDS, so leave it at 0.'):'Part of the standard recipe · full-dose pump'):t==='shot'?'Tap once for every shot':'One tap = one scoop';
+    body='<div class="single">'+big+'<div><b>'+esc(lb)+'</b><span>'+sub+'</span></div></div>'+counterRow(t,b[t],btn,t==='shot'?MINI_SHOT:'');
   }
   return head+body;
 }
@@ -1455,7 +1491,7 @@ function renderShift(){
     '<div class="store">'+
       '<svg class="lamp" style="left:20%" viewBox="0 0 56 70" aria-hidden="true"><path d="M28 0v28" stroke="#0A1F19" stroke-width="2"/><path d="M12 44a16 16 0 0 1 32 0z" fill="#0F2E26"/><ellipse cx="28" cy="45" rx="10" ry="3" fill="#FFE7A8"/></svg>'+
       '<svg class="lamp" style="left:74%" viewBox="0 0 56 70" aria-hidden="true"><path d="M28 0v20" stroke="#0A1F19" stroke-width="2"/><path d="M12 36a16 16 0 0 1 32 0z" fill="#0F2E26"/><ellipse cx="28" cy="37" rx="10" ry="3" fill="#FFE7A8"/></svg>'+
-      '<div class="bubble">'+esc(res?res.say:o.greet)+'</div>'+
+      '<div class="bubble">'+esc(res?res.say:(SH.opt.guided?'Follow the glowing buttons!':o.greet))+'</div>'+
       '<div class="cust'+(res?(res.all?' react':' sad'):(first?' in':''))+'">'+avatarSVG(o.cust,mood)+'</div>'+
       '<div class="counter-top"></div><div class="counter-front"></div>'+
       '<div class="glass" id="g-glass" style="--w:'+Math.round(106*SCALE[o.size])+'px">'+art(d,o.temp,SH.b)+'</div>'+
@@ -1463,7 +1499,7 @@ function renderShift(){
     '</div>'+
     (SH.hint?hintHTML():'')+'</div><div class="gright">'+
     '<div class="bar"><div class="tabs" role="tablist" id="g-tabs">'+tabsHTML()+'</div><div class="stpanel" id="g-panel">'+panelHTML()+'</div></div>'+
-    '<div class="gfoot"><button class="b3d gold" data-act="hint" aria-label="Hint: show the recipe card"'+(SH.hint||SH.done?' disabled':'')+'>'+I.bulb+'</button><button class="b3d" id="handoff" data-act="handoff"'+(SH.done?' disabled':'')+' style="font-size:20px">Hand off '+I.chev+'</button></div>'+
+    '<div class="gfoot"><button class="b3d gold" data-act="hint" aria-label="Hint: show the recipe card"'+(SH.hint||SH.done||SH.opt.guided?' disabled':'')+'>'+I.bulb+'</button><button class="b3d" id="handoff" data-act="handoff"'+(SH.done?' disabled':'')+' style="font-size:20px">Hand off '+I.chev+'</button></div>'+
   '</div></div>';
   if(SH.done)showSheet(resultHTML(),'Result');
 }
@@ -1491,7 +1527,7 @@ function btog(k){if(!SH.on||SH.done)return;SH.b[k]=!SH.b[k];sfx.pick();buzz(8);u
 function binc(k,dlt){
   if(!SH.on||SH.done)return;
   const b=SH.b;
-  if(dlt>0&&k==='syrN'&&!b.syrK){toast('Pick a bottle first');return;}
+  if(dlt>0&&k==='syrN'&&!b.syrK){toast('Pick a bottle first, or tap No syrup');return;}
   const v=(b[k]||0)+dlt;
   if(v<0||v>9)return;
   b[k]=v;
@@ -1527,7 +1563,7 @@ function grade(o,sp,b){
     row('Whipped cream',yn(b.whip),yn(sp.whip),[[rid('whip')]]);
     if(b.drizzle!=='None')row('Drizzle',b.drizzle,'None',[]);
     if(b.topping!=='None')row('Topping',b.topping,'None',[]);
-  }else typesOf(sp).forEach(t=>row(label(d,t,o.fl),b[t],sp[t],[[cid(t)]]));
+  }else typesOf(sp).forEach(t=>row(label(d,t,o.add),b[t],sp[t],(t==='pump'&&d.adds&&!o.add)?[]:[[cid(t)]]));
   return R;
 }
 function handOff(){
@@ -1538,12 +1574,12 @@ function handOff(){
     const h=$('#handoff');if(h){h.classList.remove('shake');void h.offsetWidth;h.classList.add('shake');}
     toast('Make the drink first: tap the stations below.');return;
   }
-  const rows=grade(o,o.spec,b),all=rows.every(r=>r.ok);
-  rows.forEach(r=>r.facts.forEach(f=>record(f[0],f[1])));
+  const rows=grade(o,o.spec,b),all=rows.every(r=>r.ok),help=!!SH.opt.guided;
+  if(!help)rows.forEach(r=>r.facts.forEach(f=>record(f[0],f[1])));
   SH.secs=(Date.now()-SH.t0)/1000;
   const fast=SH.secs<=SH.limit;
-  SH.combo=all?SH.combo+1:0;
-  const st=all?1+(fast?1:0)+(SH.hint?0:1)+(SH.combo>=3?1:0):0;
+  SH.combo=all&&!help?SH.combo+1:0;
+  const st=help?(all?1:0):all?1+(fast?1:0)+(SH.hint?0:1)+(SH.combo>=3?1:0):0;
   SH.served++;dayInc();save();
   SH.results.push({o:o,rows:rows,all:all,st:st,fast:fast,hint:SH.hint,combo:SH.combo,say:all?rnd(HAPPY):rnd(SAD),title:all?rnd(['Perfect handoff!','Nailed it!','To standard!','Beautiful drink!']):'Remake it'});
   if(!all&&!o.retry)SH.queue.push(Object.assign({},o,{retry:true,due:SH.served+2,greet:'Can I get my drink fixed?'}));
@@ -1555,9 +1591,9 @@ function handOff(){
 function resultHTML(){
   const r=SH.results[SH.results.length-1],o=r.o,d=DM[o.d];
   const lastOne=SH.base>=SH.total&&!SH.queue.length;
-  const slots=r.all?'<div class="slots"><div class="slot">'+starSVG(40,true)+'Correct</div><div class="slot">'+starSVG(40,r.fast)+'Fast</div><div class="slot">'+starSVG(40,!r.hint)+'No hint</div>'+(r.combo>=3?'<div class="slot">'+starSVG(40,true)+'Combo x'+r.combo+'</div>':'')+'</div>':'';
+  const slots=r.all&&!SH.opt.guided?'<div class="slots"><div class="slot">'+starSVG(40,true)+'Correct</div><div class="slot">'+starSVG(40,r.fast)+'Fast</div><div class="slot">'+starSVG(40,!r.hint)+'No hint</div>'+(r.combo>=3?'<div class="slot">'+starSVG(40,true)+'Combo x'+r.combo+'</div>':'')+'</div>':'';
   const rows=r.rows.map(x=>'<div class="rrow '+(x.ok?'ok':'bad')+'"><span class="mk">'+(x.ok?'✓':'✕')+'</span><span>'+esc(x.lab)+'</span><span class="val">'+(x.ok?esc(x.want):'<s>'+esc(x.you)+'</s><span style="color:var(--ink-2);margin-right:6px">→</span>'+esc(x.want))+'</span></div>').join('');
-  return '<div class="rh"><span class="face'+(r.all?'':' bad')+'">'+avatarSVG(o.cust,r.all?'happy':'sad')+'</span><div><h2>'+r.title+'</h2><p>'+(r.all?(r.st+' star'+(r.st>1?'s':'')+' earned'):(o.retry?'Check the right answers below.':'This drink comes back in a couple of orders.'))+'</p></div></div>'+
+  return '<div class="rh"><span class="face'+(r.all?'':' bad')+'">'+avatarSVG(o.cust,r.all?'happy':'sad')+'</span><div><h2>'+r.title+'</h2><p>'+(r.all?(SH.opt.guided?'You followed the recipe. Now remember it!':r.st+' star'+(r.st>1?'s':'')+' earned'):(o.retry?'Check the right answers below.':'This drink comes back in a couple of orders.'))+'</p></div></div>'+
     slots+'<div class="rows">'+rows+'</div>'+
     (r.all?'':'<div class="note"><b style="color:var(--ink)">Remember:</b> '+esc(d.r.join(' '))+'</div>')+
     '<button class="b3d wide" data-act="next-order" data-focus style="font-size:20px">'+(lastOne?'Finish shift':'Next customer')+' '+I.chev+'</button>';
@@ -1567,7 +1603,7 @@ function endShift(){
   const base=SH.results.filter(r=>!r.o.retry),perfect=base.filter(r=>r.all).length,ratio=base.length?perfect/base.length:0;
   const ls=ratio>=.85?3:ratio>=.6?2:1;
   SH.lstars=ls;
-  if(SH.opt.level){const prev=ST.lv[SH.opt.level]||0;if(ls>prev)ST.lv[SH.opt.level]=ls;}
+  if(SH.opt.level&&!SH.opt.guided){const prev=ST.lv[SH.opt.level]||0;if(ls>prev)ST.lv[SH.opt.level]=ls;}
   save();
   renderShiftEnd();
   sfx.win();
@@ -1578,24 +1614,26 @@ function renderShiftEnd(){
   const R=SH.results,base=R.filter(r=>!r.o.retry),perfect=base.filter(r=>r.all).length,seen={};
   const missed=R.filter(r=>!r.all).filter(r=>{const k=r.o.d+r.o.temp+r.o.size+r.o.fl;if(seen[k])return false;seen[k]=1;return true;});
   const L=SH.opt.level?LEVELS.find(l=>l.id===SH.opt.level):null,li=L?LEVELS.indexOf(L):-1,nextL=li>=0&&li<LEVELS.length-1?LEVELS[li+1]:null;
-  const title=SH.lstars===3?'Amazing shift!':SH.lstars===2?'Great shift!':'Shift complete!';
+  const help=!!SH.opt.guided;
+  const title=help?'Practice done!':SH.lstars===3?'Amazing shift!':SH.lstars===2?'Great shift!':'Shift complete!';
   const bestCombo=R.reduce((a,r)=>Math.max(a,r.combo),0);
   $('#game').innerHTML='<div class="gin"><div class="endwrap"><div class="panel endcard">'+
     '<div class="bigstars">'+[1,2,3].map(k=>starSVG(k===2?84:66,SH.lstars>=k)).join('')+'</div>'+
-    '<h1>'+title+'</h1><p>'+(L?esc(L.n):esc(SH.opt.title||'Practice'))+'</p>'+
+    '<h1>'+title+'</h1><p>'+(help?'Now try it without help to earn the level stars.':(L?esc(L.n):esc(SH.opt.title||'Practice')))+'</p>'+
     '<div class="stats3"><div><b>'+perfect+'/'+base.length+'</b><span>Perfect</span></div><div><b>'+SH.stars+'</b><span>Stars</span></div><div><b>'+bestCombo+'</b><span>Best combo</span></div></div>'+
     (missed.length?'<span class="lab" style="align-self:flex-start">Study these</span><ul class="revlist">'+missed.map(r=>{const o=r.o,d=DM[o.d];return '<li><b>'+SZ[o.size].n+' '+esc(dname(d,o.temp,o.fl))+'</b><span>'+r.rows.filter(x=>!x.ok).map(x=>esc(x.lab)+': '+esc(x.want)).join(' · ')+'</span></li>';}).join('')+'</ul>':'<p style="color:var(--green-d)">No mistakes. You\'re bar ready!</p>')+
-    '<div class="acts">'+(nextL?'<button class="b3d wide" data-act="play-level" data-id="'+nextL.id+'">Next: '+esc(nextL.n)+' '+I.chev+'</button>':'')+
-    '<button class="b3d '+(nextL?'cream ':'')+'wide" data-act="again-shift">Play again</button><button class="b3d dark wide" data-act="g-close">Back to map</button></div>'+
+    '<div class="acts">'+(help?'<button class="b3d wide" data-act="play-unguided">Start the real shift '+I.chev+'</button><button class="b3d gold wide" data-act="again-shift">'+I.bulb+' Practice again with help</button>':
+      (nextL?'<button class="b3d wide" data-act="play-level" data-id="'+nextL.id+'">Next: '+esc(nextL.n)+' '+I.chev+'</button>':'')+
+      '<button class="b3d '+(nextL?'cream ':'')+'wide" data-act="again-shift">Play again</button>')+'<button class="b3d dark wide" data-act="g-close">Back to map</button></div>'+
   '</div></div></div>';
   $('#game').scrollTop=0;
 }
 function showTutorial(){
   showSheet('<h2 class="h-disp">How to play</h2><ol class="tut">'+
-    '<li><span class="ti">'+I.ticket+'</span><div><b>1. Read the ticket</b>Size, hot or iced, and the drink.</div></li>'+
+    '<li><span class="ti">'+I.ticket+'</span><div><b>1. Read the ticket</b>Size, hot or iced, and the drink. <b style="display:inline;font:inherit;font-weight:900">✓ STANDARD RECIPE</b> = make it exactly like the recipe. A yellow <b style="display:inline;font:inherit;font-weight:900;background:#FFE27A;padding:0 4px">CUSTOMER ADDS</b> line = add that too, with the bar card pumps.</div></li>'+
     '<li><span class="ti">'+I.machine+'</span><div><b>2. Make it at the stations</b>Espresso, milk, syrup, toppings. The glass fills as you go.</div></li>'+
     '<li><span class="ti">'+I.whip+'</span><div><b>3. Hand it off</b>Up to 3 stars: right, fast, no hint. 3 perfect in a row = combo bonus.</div></li>'+
-    '<li><span class="ti">'+I.bulb+'</span><div><b>Stuck?</b>The yellow button shows the recipe card. Mistakes come back as remakes.</div></li>'+
+    '<li><span class="ti">'+I.bulb+'</span><div><b>Still learning?</b>Play a level with <b style="display:inline;font:inherit;font-weight:900">Learn with help</b>: the right buttons glow. In a real shift, the yellow button shows the recipe card.</div></li>'+
     '</ol><button class="b3d wide" data-act="tut-ok" data-focus>Let\'s go!</button>','How to play');
 }
 
@@ -1623,7 +1661,7 @@ function nextRush(){
     const Q={roast:['Which espresso roast?',['Signature','Blonde']],pull:['Regular or ristretto shots?',['Regular','Ristretto']],base:['Which milk or water?',BASES.slice(0,3)],prep:['How is the milk?',['Steamed','Cold']],foam:['Does it get foam on top?',['Yes','No']],whip:['Whipped cream on top?',['Yes','No']],drizzle:['Which drizzle on top?',DRIZ],topping:['Which crunchy topping?',TOPS],syrk:['Which sauce or syrup?',shuffle([f.val].concat(shuffle(RACK.filter(x=>x!==f.val)).slice(0,3)))]};
     RQ.q=Q[k][0];RQ.opts=Q[k][1];RQ.num=false;RQ.val=String(f.val);RQ.anySize=true;
   }else{
-    RQ.q=f.card?'Bar card: if a syrup is added, how many pumps?':qText(d,f.type,RQ.fl);RQ.num=true;RQ.val=f.val;RQ.anySize=false;
+    RQ.q=f.type==='pump'&&(f.card||d.adds)?'The customer adds '+addText(d,rnd(d.adds||FL))+'. How many pumps?':qText(d,f.type,'');RQ.num=true;RQ.val=f.val;RQ.anySize=false;
   }
   renderRush();
 }
@@ -1704,13 +1742,15 @@ document.addEventListener('click',function(e){
     case 'rsize': RV.size=el.dataset.s;RV.shown=new Set();sfx.tap();renderRecipes();break;
     case 'rquiz': RV.quiz=!RV.quiz;RV.shown=new Set();renderRecipes();break;
     case 'reveal': RV.shown.add(parseInt(el.dataset.i,10));sfx.pick();renderRecipes();break;
-    case 'practice': startShift({drinks:[el.dataset.id],total:5,title:'Practice: '+DM[el.dataset.id].n});break;
+    case 'practice': startShift({drinks:[el.dataset.id],total:el.dataset.g?3:5,guided:!!el.dataset.g,title:'Practice: '+DM[el.dataset.id].n});break;
+    case 'play-guided': {const L=LEVELS.find(l=>l.id===el.dataset.id);startShift({level:L.id,drinks:L.drinks,total:4,guided:true});break;}
+    case 'play-unguided': {const L=SH.opt.level?LEVELS.find(l=>l.id===SH.opt.level):null;startShift(Object.assign({},SH.opt,{guided:false,total:L?(L.total||SHIFT_N):5}));break;}
     case 'start-rush': startRush({});break;
     case 'start-review': startShift({weak:true,total:Math.min(SHIFT_N,Math.max(3,weakFacts().length)),title:'Fix my mistakes'});break;
     case 'tab': if(SH.on){SH.tab=parseInt(el.dataset.i,10);sfx.tap();updDyn(false);}break;
     case 'set': bset(el.dataset.k,el.dataset.v);break;
     case 'tog': btog(el.dataset.k);break;
-    case 'bottle': if(SH.on&&!SH.done){SH.b.syrK=el.dataset.v;sfx.pick();updDyn(false);}break;
+    case 'bottle': if(SH.on&&!SH.done){const v=el.dataset.v;if(v){SH.b.syrK=v;SH.b.noSyr=false;}else{SH.b.syrK=null;SH.b.syrN=0;SH.b.noSyr=true;}sfx.pick();updDyn(false);}break;
     case 'inc': binc(el.dataset.k,1);break;
     case 'dec': binc(el.dataset.k,-1);break;
     case 'hint': if(SH.on&&!SH.done){SH.hint=true;sfx.tap();renderShift();}break;

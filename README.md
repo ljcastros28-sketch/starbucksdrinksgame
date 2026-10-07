@@ -6,6 +6,8 @@ A study game for Starbucks drinks: standard recipes plus the shots, pumps and sc
 
 - **Map**: a training path of 9 levels, from Latte & Cappuccino to the Rush Hour Boss. Each level is a shift of 6 orders and earns 1 to 3 stars.
 - **Bar Shift**: a ticket prints, a customer waits, and you build the drink at the stations. Espresso drinks use Espresso, Milk, Syrup and Toppings. Frappuccinos use Milk, Sauce, Blender and Toppings. The glass fills as you go. A wrong drink comes back as a REMAKE. The yellow button shows the recipe card.
+- **Tickets**: `✓ STANDARD RECIPE` means make the drink exactly as the recipe says. A yellow `CUSTOMER ADDS` line means the customer asked for something extra (for example a syrup): add it using the bar-card pumps. Lattes, Cappuccinos, Flat Whites, Americanos, Misto, Cold Brew, Iced Tea and Refreshers have no syrup in their standard recipe.
+- **Learn with help**: every level and every recipe can be played with help first. The right buttons glow and each counter shows its goal. Help runs earn no level stars and don't count as mistakes.
 - **Recipes**: every drink laid out like the Starbucks app, with only the standard recipe (no customer changes). "Quiz me" hides the answers.
 - **Rush**: 60 seconds of quick questions, plus "Fix my mistakes".
 - **Cards**: the bar cards, the recipe tables and memory tricks.
