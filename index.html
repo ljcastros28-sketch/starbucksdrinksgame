@@ -136,9 +136,9 @@ main{max-width:640px;margin:0 auto;padding:16px 16px calc(120px + env(safe-area-
 /* ---------- recipe collection ---------- */
 .vhead{display:flex;flex-direction:column;gap:6px}
 .vhead p{color:var(--on-2);font-weight:700}
-.filters{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:2px 16px 8px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;padding:2px 0 8px}
 .filters::-webkit-scrollbar{display:none}
-.fchip{flex:none;display:inline-flex;align-items:center;gap:6px;font:600 15px/1 var(--fd);padding:10px 15px;border-radius:14px;background:var(--house-2);color:var(--on);box-shadow:0 4px 0 #14302A;white-space:nowrap}
+.fchip{flex:none;display:inline-flex;align-items:center;gap:6px;font:600 15px/1 var(--fd);padding:9px 13px;border-radius:14px;background:var(--house-2);color:var(--on);box-shadow:0 4px 0 #14302A;white-space:nowrap}
 .fchip svg{width:16px;height:16px}
 .fchip[aria-pressed="true"]{background:var(--cream);color:var(--green-d);box-shadow:0 4px 0 var(--cream-d)}
 .coll{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
@@ -210,6 +210,27 @@ table.card td.ic{background:#F6EDDB}
 table.card td.na{background-image:repeating-linear-gradient(135deg,transparent 0 5px,var(--line) 5px 7px)}
 table.card td.tx{font:800 13px/1.25 var(--fb)}
 .foot{font:700 13.5px/1.45 var(--fb);color:var(--on-2);margin-top:8px}
+.bcards{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+@media (min-width:560px){.bcards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1000px){.bcards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.bc{display:flex;flex-direction:column;gap:10px;padding:13px 14px 14px;min-width:0}
+.bc h3{font:600 16.5px/1.25 var(--fd);overflow-wrap:anywhere}
+.bch{display:flex;align-items:center;gap:12px}
+.bch .disc{width:52px;height:52px;flex:none;border-radius:50%;padding-bottom:3px}
+.sg{display:grid;grid-template-columns:44px repeat(4,minmax(0,1fr));gap:6px;align-items:center}
+.sg.one{grid-template-columns:repeat(4,minmax(0,1fr))}
+.sg .szh{font:900 11.5px/1 var(--fb);letter-spacing:.08em;color:var(--ink-2);text-align:center}
+.sg .rl{font:900 10.5px/1 var(--fb);letter-spacing:.08em;text-transform:uppercase;border-radius:6px;padding:5px 0;text-align:center}
+.sg .rl.hot{background:#FFE0D2;color:#A8361A}
+.sg .rl.iced{background:#DCEEF8;color:#0E5E86}
+.sg b,.sg i{display:grid;place-items:center;height:42px;border-radius:11px;font:700 22px/1 var(--fd);font-style:normal}
+.sg b{background:#fff;border:2px solid var(--line);color:var(--ink);box-shadow:0 3px 0 var(--line)}
+.sg i.na{color:#C9BBA0;background:repeating-linear-gradient(135deg,transparent 0 5px,rgba(0,0,0,.05) 5px 7px);border-radius:11px}
+.kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:0}
+.kv div{background:#fff;border:2px solid var(--line);border-radius:11px;padding:7px 10px;min-width:0}
+.kvno{font:800 13px/1.3 var(--fb);color:var(--ink-2)}
+.kv dt{font:900 10.5px/1.1 var(--fb);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.kv dd{margin:3px 0 0;font:600 14.5px/1.2 var(--fd);color:var(--ink);overflow-wrap:anywhere}
 .rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
 .rcard{display:flex;flex-direction:column;gap:8px;padding:13px 14px}
 .rcard h3{font:600 17px/1.15 var(--fd)}
@@ -1198,26 +1219,40 @@ function renderRushHub(){
       '<button class="b3d red wide" data-act="start-rush" style="font-size:21px;min-height:62px">Start the rush '+I.chev+'</button></div>'+
     '<div class="panel" style="display:flex;flex-direction:column;gap:10px;align-items:flex-start"><h2 class="h-disp" style="font-size:22px">Fix my mistakes</h2><p style="color:var(--ink-2)">'+(wc?'A shift built only from the '+wc+' things you have missed. Right twice in a row and they are fixed.':'Nothing to fix yet. Play a level first.')+'</p><button class="b3d gold" data-act="start-review"'+(wc?'':' disabled')+'>Fix them '+I.chev+'</button></div>';
 }
-const cell=(v,ic)=>'<td class="'+(v==null?'na':'')+(ic?' ic':'')+'">'+(v==null?'':v)+'</td>';
+/* Cheat-sheet cards: one card per beverage so nothing ever needs a sideways swipe on a phone. */
+const box=v=>v==null?'<i class="na">–</i>':'<b>'+v+'</b>';
 function tbl2(title,rows){
   const SS=['S','T','G','V'];
-  let h='<h2>'+title+'</h2><div class="tw"><table class="card"><thead><tr><th class="bev" rowspan="2">Beverage</th>'+SS.map(s=>'<th colspan="2">'+s+'</th>').join('')+'</tr><tr>'+SS.map(()=>'<th class="ti">HOT</th><th class="ti">ICED</th>').join('')+'</tr></thead><tbody>';
-  rows.forEach(r=>{const m=TAB[r[1]];h+='<tr><th scope="row" class="bev">'+esc(r[0])+'</th>'+SS.map(s=>cell(m.hot&&m.hot[s],false)+cell(m.iced&&m.iced[s],true)).join('')+'</tr>';});
-  return h+'</tbody></table></div>';
+  return '<h2>'+title+'</h2><div class="bcards">'+rows.map(r=>{
+    const m=TAB[r[1]];
+    const line=(t,lab)=>m[t]?'<span class="rl '+t+'">'+lab+'</span>'+SS.map(x=>box(m[t][x])).join(''):'';
+    return '<div class="panel bc"><h3>'+esc(r[0])+'</h3><div class="sg"><span></span>'+SS.map(x=>'<span class="szh">'+x+'</span>').join('')+line('hot','Hot')+line('iced','Iced')+'</div></div>';
+  }).join('')+'</div>';
 }
 function tbl1(title,rows){
   const SS=['T','G','V','TR'];
-  let h='<h2>'+title+'</h2><div class="tw"><table class="card"><thead><tr><th class="bev">Beverage</th>'+SS.map(s=>'<th>'+s+'</th>').join('')+'</tr></thead><tbody>';
-  rows.forEach(r=>{const m=TAB[r[1]].iced;h+='<tr><th scope="row" class="bev">'+esc(r[0])+'</th>'+SS.map(s=>cell(m[s],false)).join('')+'</tr>';});
-  return h+'</tbody></table></div>';
+  return '<h2>'+title+'</h2><div class="bcards">'+rows.map(r=>{
+    const m=TAB[r[1]].iced;
+    return '<div class="panel bc"><h3>'+esc(r[0])+'</h3><div class="sg one">'+SS.map(x=>'<span class="szh">'+x+'</span>').join('')+SS.map(x=>box(m[x])).join('')+'</div></div>';
+  }).join('')+'</div>';
+}
+function recCard(id,pairs){
+  const d=DM[id];
+  return '<div class="panel bc"><div class="bch"><span class="disc">'+heroArt(d,REC[id].rt)+'</span><h3>'+esc(d.n)+'</h3></div><dl class="kv">'+
+    pairs.filter(x=>x[1]!=='–').map(x=>'<div><dt>'+x[0]+'</dt><dd>'+esc(x[1])+'</dd></div>').join('')+'</dl>'+
+    (pairs.some(x=>x[1]==='–')?'<p class="kvno">Not in this drink: '+pairs.filter(x=>x[1]==='–').map(x=>x[0]).join(', ')+'</p>':'')+'</div>';
 }
 function tblFrap(){
-  return '<h2>Frappuccino recipes</h2><div class="tw"><table class="card"><thead><tr><th class="bev">Drink</th><th>Milk</th><th>Sauce</th><th>Roast</th><th>Chips</th><th>Whip</th><th>Drizzle</th><th>Topping</th></tr></thead><tbody>'+
-    Object.keys(REC).filter(id=>REC[id].kind==='frap').map(id=>{const r=REC[id],c=countsFor(DM[id],'iced','G');return '<tr><th scope="row" class="bev">'+esc(DM[id].n)+'</th><td class="tx">'+r.base+'</td><td class="tx">'+r.sn+'</td><td class="tx">Frappuccino Roast</td><td class="tx">'+(c.chip?c.chip+' scoops (G)':'–')+'</td><td class="tx">'+(r.whip?'Yes':'–')+'</td><td class="tx">'+(r.drizzle==='None'?'–':r.drizzle)+'</td><td class="tx">'+(r.topping==='None'?'–':r.topping)+'</td></tr>';}).join('')+'</tbody></table></div>';
+  return '<h2>Frappuccino recipes</h2><div class="bcards">'+Object.keys(REC).filter(id=>REC[id].kind==='frap').map(id=>{
+    const r=REC[id],c=countsFor(DM[id],'iced','G');
+    return recCard(id,[['Milk',r.base],['Sauce',r.sn],['Blender','Frappuccino Roast'],['Chips',c.chip?c.chip+' scoops (Grande)':'–'],['Whip',r.whip?'Yes':'–'],['Drizzle',r.drizzle==='None'?'–':r.drizzle],['Topping',r.topping==='None'?'–':r.topping]]);
+  }).join('')+'</div>';
 }
 function tblRec(){
-  return '<h2>Recipes at a glance</h2><div class="tw"><table class="card"><thead><tr><th class="bev">Drink</th><th>Roast</th><th>Shot</th><th>Milk</th><th>Temp</th><th>Foam</th><th>Whip</th><th>Syrup</th></tr></thead><tbody>'+
-    Object.keys(REC).filter(id=>REC[id].kind!=='frap').map(id=>{const r=REC[id];return '<tr><th scope="row" class="bev">'+esc(DM[id].n)+'</th><td class="tx">'+r.roast+'</td><td class="tx">'+r.pull+'</td><td class="tx">'+r.base+'</td><td class="tx">'+(r.prep||'–')+'</td><td class="tx">'+(r.foam?'Yes':'–')+'</td><td class="tx">'+(r.whip?'Yes':'–')+'</td><td class="tx">'+(r.syr||'–')+'</td></tr>';}).join('')+'</tbody></table></div>';
+  return '<h2>Recipes at a glance</h2><div class="bcards">'+Object.keys(REC).filter(id=>REC[id].kind!=='frap').map(id=>{
+    const r=REC[id];
+    return recCard(id,[['Roast',r.roast],['Shot',r.pull],['Milk',r.base],['Temp',r.prep||'–'],['Foam',r.foam?'Yes':'–'],['Whip',r.whip?'Yes':'–'],['Syrup',r.sn||'–']]);
+  }).join('')+'</div>';
 }
 function renderCards(){
   $('#v-cards').innerHTML=
