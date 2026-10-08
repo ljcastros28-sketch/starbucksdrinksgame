@@ -259,7 +259,7 @@ table.card td.tx{font:800 13px/1.25 var(--fb)}
 .tk-x{font-size:14px;font-weight:700;margin-top:2px;text-transform:uppercase;color:#333}
 .tk-x::before{content:"+ "}
 .tk-add{display:inline-block;margin-top:6px;background:#FFE27A;color:#3D2A00;border:2px dashed #B98500;border-radius:4px;padding:3px 8px;font-size:13.5px;font-weight:700;letter-spacing:.03em}
-.tk-std{margin-top:5px;font-size:11.5px;font-weight:700;color:#2E7D57;letter-spacing:.06em}
+.tk-std{margin-left:auto;font-size:12px;font-weight:700;color:#2E7D57;letter-spacing:.05em;border:2px solid #2E7D57;border-radius:3px;padding:1px 6px}
 .glow{position:relative;z-index:1;animation:glow 1.1s ease-in-out infinite}
 @keyframes glow{0%,100%{box-shadow:0 4px 0 var(--gold-d),0 0 0 3px var(--gold)}50%{box-shadow:0 4px 0 var(--gold-d),0 0 0 8px rgba(255,201,60,.5)}}
 .goal{font:700 14px/1 var(--fd);background:var(--gold-l);color:var(--gold-t);padding:7px 9px;border-radius:9px;white-space:nowrap;flex:none}
@@ -271,7 +271,7 @@ table.card td.tx{font:800 13px/1.25 var(--fb)}
 .pt i{display:block;height:100%;transform-origin:left center;animation-name:drain;animation-timing-function:linear;animation-fill-mode:forwards;animation-delay:var(--dl,0s);border-radius:999px}
 .stop .pt i{animation-play-state:paused}
 @keyframes drain{0%{transform:scaleX(1);background:#00A862}55%{background:#FFC93C}100%{transform:scaleX(0);background:#E5484D}}
-.store{position:relative;height:214px;margin-top:12px;overflow:hidden;background:radial-gradient(70% 90% at 30% 0%,rgba(255,236,190,.16),transparent 70%),repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 3px,transparent 3px 52px),linear-gradient(#2A5246,#1E3932)}
+.store{position:relative;height:206px;margin-top:12px;overflow:hidden;background:radial-gradient(70% 90% at 30% 0%,rgba(255,236,190,.16),transparent 70%),repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 3px,transparent 3px 52px),linear-gradient(#2A5246,#1E3932)}
 .lamp{position:absolute;top:0;width:56px}
 .counter-top{position:absolute;left:0;right:0;bottom:46px;height:16px;background:linear-gradient(#B98557,#9B6A40);box-shadow:0 -2px 0 rgba(255,255,255,.12) inset}
 .counter-front{position:absolute;left:0;right:0;bottom:0;height:46px;background:repeating-linear-gradient(90deg,rgba(0,0,0,.08) 0 2px,transparent 2px 60px),linear-gradient(#7A4E2C,#5A381F)}
@@ -291,7 +291,7 @@ table.card td.tx{font:800 13px/1.25 var(--fb)}
 .badge svg{width:15px;height:15px;flex:none}
 .bar{background:linear-gradient(#C7CFD1,#A9B3B6);padding:10px 12px 12px;box-shadow:inset 0 3px 0 rgba(255,255,255,.4)}
 .tabs{display:flex;gap:8px}
-.tab{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;background:#E9EDEE;color:#45524F;border-radius:14px;padding:6px 4px 5px;font:600 13px/1 var(--fd);box-shadow:0 4px 0 #8C989B;min-height:56px}
+.tab{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;background:#E9EDEE;color:#45524F;border-radius:14px;padding:6px 4px 5px;font:600 13px/1 var(--fd);box-shadow:0 4px 0 #8C989B;min-height:52px}
 .tab svg{width:28px;height:28px}
 .tab[aria-selected="true"]{background:var(--cream);color:var(--green-d);box-shadow:0 4px 0 var(--cream-d),0 0 0 3px var(--green)}
 .tab .tick{position:absolute;top:-6px;right:-4px;width:20px;height:20px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font:900 12px/1 var(--fb);box-shadow:0 2px 0 var(--green-d)}
@@ -303,11 +303,11 @@ table.card td.tx{font:800 13px/1.25 var(--fb)}
 .opts.b4 .opt{font-size:12.5px;padding:6px 2px;min-height:64px}
 .opts.b4 .opt svg{width:28px;height:28px}
 .sh{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.sh h3{font:700 20px/1 var(--fd)}
-.nextst{font:600 14px/1 var(--fd);color:var(--green-d);display:inline-flex;align-items:center;gap:3px;padding:6px 2px}
+.sh h3{font:700 18px/1 var(--fd)}
+.nextst{font:600 14px/1 var(--fd);color:var(--green-d);display:inline-flex;align-items:center;gap:3px;padding:2px}
 .orow{display:flex;flex-direction:column;gap:6px}
 .opts{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr));gap:8px}
-.opt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#fff;border-radius:13px;padding:8px 6px;font:600 14.5px/1.1 var(--fd);color:var(--ink);box-shadow:0 4px 0 var(--line),inset 0 0 0 2px var(--line);min-height:48px;transition:transform .07s;text-align:center}
+.opt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#fff;border-radius:13px;padding:8px 6px;font:600 14.5px/1.1 var(--fd);color:var(--ink);box-shadow:0 4px 0 var(--line),inset 0 0 0 2px var(--line);min-height:44px;transition:transform .07s;text-align:center}
 .opt:active:not([disabled]){transform:translateY(3px);box-shadow:0 1px 0 var(--line),inset 0 0 0 2px var(--line)}
 .opt svg{width:34px;height:34px}
 .opt[aria-pressed="true"]{background:#E3F5EC;color:var(--green-d);box-shadow:0 4px 0 var(--green-d),inset 0 0 0 3px var(--green)}
@@ -561,14 +561,14 @@ const TAB={
   CHIPG:{iced:{G:3}}                                // frappuccino chips: only the Grande is known so far
 };
 const REC={
-  latte: {rt:'hot',roast:'Signature',pull:'Regular',base:'2% Milk',prep:'Steamed',foam:1,whip:0,syr:null},
-  capp:  {rt:'hot',roast:'Signature',pull:'Regular',base:'2% Milk',prep:'Steamed',foam:1,whip:0,syr:null},
-  mocha: {rt:'hot',roast:'Signature',pull:'Regular',base:'2% Milk',prep:'Steamed',foam:1,whip:1,syr:'Mocha',sn:'Mocha Sauce'},
-  wmocha:{rt:'hot',roast:'Signature',pull:'Regular',base:'2% Milk',prep:'Steamed',foam:1,whip:1,syr:'White Mocha',sn:'White Chocolate Mocha Sauce'},
-  amer:  {rt:'hot',roast:'Signature',pull:'Regular',base:'Hot Water',prep:null,foam:0,whip:0,syr:null},
-  flat:  {rt:'hot',roast:'Signature',pull:'Ristretto',base:'Whole Milk',prep:'Steamed',foam:0,whip:0,syr:null},
+  latte: {rt:'hot',roast:'Espresso',pull:'Regular',base:'2% Milk',prep:'Steamed',foam:1,whip:0,syr:null},
+  capp:  {rt:'hot',roast:'Espresso',pull:'Regular',base:'2% Milk',prep:'Steamed',foam:1,whip:0,syr:null},
+  mocha: {rt:'hot',roast:'Espresso',pull:'Regular',base:'2% Milk',prep:'Steamed',foam:1,whip:1,syr:'Mocha',sn:'Mocha Sauce'},
+  wmocha:{rt:'hot',roast:'Espresso',pull:'Regular',base:'2% Milk',prep:'Steamed',foam:1,whip:1,syr:'White Mocha',sn:'White Chocolate Mocha Sauce'},
+  amer:  {rt:'hot',roast:'Espresso',pull:'Regular',base:'Hot Water',prep:null,foam:0,whip:0,syr:null},
+  flat:  {rt:'hot',roast:'Espresso',pull:'Ristretto',base:'Whole Milk',prep:'Steamed',foam:0,whip:0,syr:null},
   cort:  {rt:'hot',roast:'Blonde',pull:'Ristretto',base:'Whole Milk',prep:'Steamed',foam:1,whip:0,syr:null},
-  shaken:{rt:'iced',roast:'Signature',pull:'Regular',base:'2% Milk',prep:'Cold',foam:0,whip:0,syr:'Classic',sn:'Classic Syrup'},
+  shaken:{rt:'iced',roast:'Espresso',pull:'Regular',base:'2% Milk',prep:'Cold',foam:0,whip:0,syr:'Classic',sn:'Classic Syrup'},
   mochafrap:{rt:'iced',kind:'frap',base:'Whole Milk',syr:'Mocha',sn:'Mocha Sauce',whip:1,drizzle:'None',topping:'None'},
   mcc:   {rt:'iced',kind:'frap',base:'Whole Milk',syr:'Mocha',sn:'Mocha Sauce',whip:1,drizzle:'Mocha',topping:'Cookie Crumble'},
   crc:   {rt:'iced',kind:'frap',base:'Whole Milk',syr:'Dark Caramel',sn:'Dark Caramel Sauce',whip:1,drizzle:'Caramel',topping:'Caramel Crunch'}
@@ -587,9 +587,9 @@ const FL=['Vanilla','Caramel','Hazelnut','Toffee Nut','Sugar-Free Vanilla','Pepp
 const G=['Espresso bar','Tea & Chocolate','Cold bar','Frappuccino'];
 const D=[
   {id:'latte',g:0,n:'Caffè Latte',adds:FL,addon:.6,t:['hot','iced'],c:[['shot','E1'],['pump','P1']],lb:{pump:'{f} pumps'},col:'#D7B68F',
-   r:['2% milk, steamed, with a thin layer of foam. Signature espresso.','Shots 1-1-2-2 (S-T-G-V). Only Iced Venti gets 3.','No syrup in the standard recipe. If the ticket says CUSTOMER ADDS a syrup: 2-3-4-5 pumps, Iced Venti 6.']},
+   r:['2% milk, steamed, with a thin layer of foam. Espresso roast.','Shots 1-1-2-2 (S-T-G-V). Only Iced Venti gets 3.','No syrup in the standard recipe. If the ticket says CUSTOMER ADDS a syrup: 2-3-4-5 pumps, Iced Venti 6.']},
   {id:'capp',g:0,n:'Cappuccino',adds:FL,addon:.6,t:['hot','iced'],c:[['shot','E1'],['pump','P1']],lb:{pump:'{f} pumps'},col:'#DCC09D',
-   r:['Same ingredients as a latte: 2% steamed, foam, Signature.','The difference: lots more foam, so the cup feels light.','Shots 1-1-2-2 like a latte. No syrup unless the customer adds one.']},
+   r:['Same ingredients as a latte: 2% steamed, foam, Espresso roast.','The difference: lots more foam, so the cup feels light.','Shots 1-1-2-2 like a latte. No syrup unless the customer adds one.']},
   {id:'mocha',g:0,n:'Caffè Mocha',t:['hot','iced'],c:[['shot','E1'],['pump','P1']],lb:{pump:'Mocha pumps'},col:'#8B5A3C',
    r:['Mocha sauce + 2% steamed milk + foam + whipped cream.','Shots like a latte: 1-1-2-2.','Mocha pumps like latte syrup: 2-3-4-5. Iced Venti 6.']},
   {id:'wmocha',g:0,n:'White Chocolate Mocha',t:['hot','iced'],c:[['shot','E1'],['pump','P1']],lb:{pump:'White Mocha pumps'},col:'#E3CCAA',
@@ -597,13 +597,13 @@ const D=[
   {id:'cmac',g:0,n:'Caramel Macchiato',t:['hot','iced'],c:[['shot','E1'],['pump','P2']],lb:{pump:'Vanilla pumps'},col:'#D2A879',
    r:['Vanilla is one less than a latte: 1-2-3-4. Iced Venti 5.','Shots like a latte: 1-1-2-2, Iced Venti 3.']},
   {id:'flat',g:0,n:'Flat White',adds:FL,addon:.6,t:['hot','iced'],c:[['shot','E4'],['pump','P1']],lb:{pump:'{f} pumps',shot:'Ristretto shots'},col:'#C9A27A',
-   r:['Whole milk, steamed. Signature espresso, ristretto. No foam layer, no syrup.','Ristretto shots hot 2-2-3-3. Iced 2-3-4.','If the customer adds syrup: 2-3-4-5, Iced Venti 6.']},
+   r:['Whole milk, steamed. Espresso roast, ristretto shots. No foam layer, no syrup.','Ristretto shots hot 2-2-3-3. Iced 2-3-4.','If the customer adds syrup: 2-3-4-5, Iced Venti 6.']},
   {id:'amer',g:0,n:'Caffè Americano',adds:FL,addon:.6,t:['hot','iced'],c:[['shot','E2'],['pump','P1']],lb:{pump:'{f} pumps'},col:'#2B160B',
-   r:['Just Signature espresso and hot water. No milk, no syrup.','Shots 1-2-3-4 (S-T-G-V), hot or iced.','If the customer adds syrup: 2-3-4-5, Iced Venti 6.']},
+   r:['Just Espresso-roast shots and hot water. No milk, no syrup.','Shots 1-2-3-4 (S-T-G-V), hot or iced.','If the customer adds syrup: 2-3-4-5, Iced Venti 6.']},
   {id:'cort',g:0,n:'Cortado',t:['hot'],c:[['shot','E5']],lb:{shot:'Ristretto shots'},col:'#B98A5E',
-   r:['Short only. 3 ristretto shots.','The one drink with BLONDE espresso.','Whole milk, steamed, with foam.']},
+   r:['Short only. 3 ristretto shots.','The one drink with BLONDE roast.','Whole milk, steamed, with foam.']},
   {id:'shaken',g:0,n:'Iced Shaken Espresso',t:['iced'],c:[['shot','E3'],['pump','P3']],lb:{pump:'Classic pumps'},col:'#A8743F',
-   r:['Signature espresso + Classic syrup, shaken. Topped with 2% milk.','Pumps 1-2-3 (T-G-V). Shots 2-3-4: always one more shot than pumps.','Old recipes online say 4 pumps in a Grande. Your card and the app say 2: that is the current standard.']},
+   r:['Espresso roast + Classic syrup, shaken. Topped with 2% milk.','Pumps 1-2-3 (T-G-V). Shots 2-3-4: always one more shot than pumps.','Old recipes online say 4 pumps in a Grande. Your card and the app say 2: that is the current standard.']},
   {id:'misto',g:1,n:'Caffè Misto',adds:FL,addon:1,t:['hot'],c:[['pump','P1']],lb:{pump:'{f} pumps'},col:'#B88A5E',r:['Brewed coffee + steamed milk, half and half. No espresso, no syrup.','If the customer adds syrup: 2-3-4-5, like a latte.']},
   {id:'chai',g:1,n:'Chai Tea Latte',t:['hot','iced'],c:[['pump','P1']],lb:{pump:'Chai pumps'},col:'#C99A6B',r:['Tea lattes follow the latte: 2-3-4-5. Iced Venti 6.']},
   {id:'hotchoc',g:1,n:'Hot Chocolate',ni:'Chocolate Milk',t:['hot','iced'],c:[['pump','P1']],lb:{pump:'Mocha pumps'},col:'#7A4A2E',r:['Mocha sauce + steamed 2% milk, topped with whipped cream.','Mocha pumps like a latte: 2-3-4-5. Cold Venti 6.','The card calls the cold one Chocolate Milk.']},
@@ -652,7 +652,7 @@ const RULES=[
 const SYR={Classic:'#EADFC8',Vanilla:'#EBC873',Caramel:'#C8782B',Hazelnut:'#9C6236','Toffee Nut':'#B98543','Sugar-Free Vanilla':'#F2E6BC',Peppermint:'#E35D6A',Mocha:'#4A2617','White Mocha':'#EFE3CC','Dark Caramel':'#7A4320'};
 const RACK=['Classic','Vanilla','Caramel','Hazelnut','Toffee Nut','Sugar-Free Vanilla','Peppermint','Mocha','White Mocha','Dark Caramel'];
 const SAUCE={Mocha:1,'White Mocha':1,'Dark Caramel':1};
-const DRIZ=['None','Caramel','Mocha'],TOPS=['None','Cookie Crumble','Caramel Crunch'];
+const ROASTS=['Blonde','Espresso','Dark'],DRIZ=['None','Caramel','Mocha'],TOPS=['None','Cookie Crumble','Caramel Crunch'];
 const BASES=['2% Milk','Whole Milk','Hot Water','No milk'];
 const NAMES=['Sofia','Mateo','Emma','Liam','Valentina','Noah','Camila','Lucas','Mia','Diego','Olivia','Ethan','Isabella','Daniel','Ava','Gabriel','Chloe','Sam','Maya','Leo','Jordan','Ana','Luis','Grace','Nico','Zoe'];
 const CH=['CAFE','DRIVE THRU','MOBILE ORDER','DELIVERY'];
@@ -861,7 +861,7 @@ function art(d,temp,s){
     const sh=s.shots||0,sn=s.syrN||0,k=s.syrK;
     const milk=s.base==='2% Milk'||s.base==='Whole Milk',water=s.base==='Hot Water';
     if(sn>0)L.push({h:Math.min(17,3+sn*1.8),col:SYR[k]||'#EBC873'});
-    if(sh>0)L.push({h:Math.min(38,6+sh*6.5),col:s.roast==='Blonde'?'#7B4A25':'#3A1F12',esp:1});
+    if(sh>0)L.push({h:Math.min(38,6+sh*6.5),col:s.roast==='Blonde'?'#7B4A25':s.roast==='Dark'?'#1C0E07':'#3A1F12',esp:1});
     const foamH=s.foam?13:0;
     if(milk||water){
       const used=L.reduce((a,x)=>a+x.h,0);
@@ -1155,7 +1155,7 @@ function fieldsFor(d,temp,size){
     if(r.foam)F.push({cat:'Milk',val:'Foam'});
     F.push({cat:r.base==='Hot Water'?'Add-ins':'Milk',val:r.base});
     if(r.prep)F.push({cat:'Milk',val:r.prep==='Steamed'?'Steamed Hot':'Cold'});
-    F.push({cat:'Espresso & Shot Options',val:r.roast+' Espresso'});
+    F.push({cat:'Espresso & Shot Options',val:r.roast==='Espresso'?'Espresso roast (app: Signature Espresso)':r.roast+' roast'});
     if(r.pull==='Ristretto')F.push({cat:'Espresso & Shot Options',val:'Ristretto'});
     if(r.syr)F.push({cat:SAUCE[r.syr]?'Flavors':'Sweeteners',val:'Pump(s) '+r.sn,num:c.pump});
   }else{
@@ -1377,9 +1377,9 @@ function ticketHTML(o,first){
   const el=SH.done?SH.secs:(Date.now()-SH.t0)/1000;
   return '<div class="ticket'+(first?' printing':'')+'" role="group" aria-label="Order ticket">'+
     '<div class="tk-top"><span>'+o.ch+' · '+o.time+'</span><span>#'+o.no+' '+esc(o.who.toUpperCase())+'</span></div>'+
-    '<div class="tk-mid"><span class="tk-sz">'+SZ[o.size].n.toUpperCase()+'</span><span class="tk-tp '+(tag==='Hot'?'hot':tag==='Blended'?'blend':'iced')+'">'+tag.toUpperCase()+'</span><span style="font-size:12.5px;color:#555;font-weight:700">'+ozOf(o.size,o.temp)+' OZ</span></div>'+
+    '<div class="tk-mid"><span class="tk-sz">'+SZ[o.size].n.toUpperCase()+'</span><span class="tk-tp '+(tag==='Hot'?'hot':tag==='Blended'?'blend':'iced')+'">'+tag.toUpperCase()+'</span><span style="font-size:12.5px;color:#555;font-weight:700">'+ozOf(o.size,o.temp)+' OZ</span>'+(x?'':'<span class="tk-std">✓ STANDARD</span>')+'</div>'+
     '<div class="tk-name">'+esc(dname(d,o.temp,o.fl).replace(/^Iced /,''))+'</div>'+
-    (x?'<div class="tk-add">CUSTOMER ADDS: '+esc(x.toUpperCase())+'</div>':'<div class="tk-std">✓ STANDARD RECIPE · NO CHANGES</div>')+
+    (x?'<div class="tk-add">CUSTOMER ADDS: '+esc(x.toUpperCase())+'</div>':'')+
     (o.retry?'<div class="tk-remake">REMAKE</div>':'')+
     '<div class="patience'+(SH.done?' stop':'')+'">'+I.clock+'<span class="pt"><i style="animation-duration:'+SH.limit+'s;--real:'+SH.limit+'s;--dl:-'+Math.min(el,SH.limit).toFixed(2)+'s"></i></span><span>speed ★</span></div>'+
   '</div>';
@@ -1437,8 +1437,8 @@ function panelHTML(){
   let body='';
   if(b.rec){
     if(T.k==='esp'){
-      body='<div class="duo"><div class="orow"><span class="lab">Roast</span><div class="opts">'+optBtn('set','roast','Signature',b.roast==='Signature','Signature')+optBtn('set','roast','Blonde',b.roast==='Blonde','Blonde')+'</div></div>'+
-        '<div class="orow"><span class="lab">Shot type</span><div class="opts">'+optBtn('set','pull','Regular',b.pull==='Regular','Regular')+optBtn('set','pull','Ristretto',b.pull==='Ristretto','Ristretto')+'</div></div></div>'+
+      body='<div class="orow"><span class="lab">Roast · machine button</span><div class="opts" style="--n:3">'+ROASTS.map(x=>optBtn('set','roast',x,b.roast===x,x)).join('')+'</div></div>'+
+        '<div class="orow"><span class="lab">Shot type</span><div class="opts">'+optBtn('set','pull','Regular',b.pull==='Regular','Regular')+optBtn('set','pull','Ristretto',b.pull==='Ristretto','Ristretto')+'</div></div>'+
         '<div class="orow"><span class="lab">How many shots</span>'+counterRow('shots',b.shots,'Pull shot',MINI_SHOT)+'</div>';
     }else if(T.k==='milk'&&b.kind==='frap'){
       body='<div class="orow"><span class="lab">Milk</span><div class="opts b4" style="--n:3">'+['2% Milk','Whole Milk','No milk'].map(x=>optBtn('set','base',x,b.base===x,BASE_ICON[x]+x)).join('')+'</div></div>'+
@@ -1553,7 +1553,7 @@ function grade(o,sp,b){
     row('Drizzle',b.drizzle,sp.drizzle,[[rid('drizzle')]]);
     row('Topping',b.topping,sp.topping,[[rid('topping')]]);
   }else if(sp.rec){
-    row('Espresso roast',b.roast||'—',sp.roast,[[rid('roast')]]);
+    row('Roast',b.roast||'—',sp.roast,[[rid('roast')]]);
     row('Shot type',b.pull||'—',sp.pull,[[rid('pull')]]);
     row('Shots',b.shots,sp.shots,[[cid('shot')]]);
     row('Milk / water',b.base||'—',sp.base,[[rid('base')]]);
@@ -1658,7 +1658,7 @@ function nextRush(){
   RQ.size=f.size||sizesFor(d,f.temp)[Math.min(2,sizesFor(d,f.temp).length-1)];
   if(f.type.indexOf('r:')===0){
     const k=f.type.slice(2);
-    const Q={roast:['Which espresso roast?',['Signature','Blonde']],pull:['Regular or ristretto shots?',['Regular','Ristretto']],base:['Which milk or water?',BASES.slice(0,3)],prep:['How is the milk?',['Steamed','Cold']],foam:['Does it get foam on top?',['Yes','No']],whip:['Whipped cream on top?',['Yes','No']],drizzle:['Which drizzle on top?',DRIZ],topping:['Which crunchy topping?',TOPS],syrk:['Which sauce or syrup?',shuffle([f.val].concat(shuffle(RACK.filter(x=>x!==f.val)).slice(0,3)))]};
+    const Q={roast:['Which roast on the espresso machine?',ROASTS],pull:['Regular or ristretto shots?',['Regular','Ristretto']],base:['Which milk or water?',BASES.slice(0,3)],prep:['How is the milk?',['Steamed','Cold']],foam:['Does it get foam on top?',['Yes','No']],whip:['Whipped cream on top?',['Yes','No']],drizzle:['Which drizzle on top?',DRIZ],topping:['Which crunchy topping?',TOPS],syrk:['Which sauce or syrup?',shuffle([f.val].concat(shuffle(RACK.filter(x=>x!==f.val)).slice(0,3)))]};
     RQ.q=Q[k][0];RQ.opts=Q[k][1];RQ.num=false;RQ.val=String(f.val);RQ.anySize=true;
   }else{
     RQ.q=f.type==='pump'&&(f.card||d.adds)?'The customer adds '+addText(d,rnd(d.adds||FL))+'. How many pumps?':qText(d,f.type,'');RQ.num=true;RQ.val=f.val;RQ.anySize=false;
